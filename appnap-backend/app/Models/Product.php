@@ -11,15 +11,13 @@ class Product extends Model
 {
     use HasFactory;
 
-    /**
-     * @return void
-     */
-    public function setImageAttribute()
-    {
-        $new_avatar = request()->file('image');
-        $old_avatar = $this->attributes['image'];
-        $this->attributes['image'] = ProductService::storeImage($old_avatar, $new_avatar);
-    }
+    protected $fillable = [
+        'name',
+        'price',
+        'image',
+        'category_id',
+    ];
+
 
     public function category()
     {

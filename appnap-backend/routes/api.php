@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
-    Route::post('registration', 'register');
+    Route::post('register', 'register');
 });
 
 //Authenticate Routes
@@ -27,15 +27,19 @@ Route::middleware('auth:api')->group(function () {
 
     Route::controller(AuthController::class)->group(function () {
         Route::get('check-token', 'checkToken');
-        Route::get('logout', 'logout');
+        Route::post('logout', 'logout');
     });
 
 
     // Category Routes
     Route::get('categories', [CategoryController::class, 'index']);
 
+
     // Products Routes
-    Route::resource('products', ProductController::class);
-
-
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('product', 'index');
+        Route::post('product', 'store');
+        Route::post('product/{id}', 'update');
+        Route::delete('product/{id}', 'destroy');
+    });
 });

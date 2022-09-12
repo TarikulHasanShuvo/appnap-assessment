@@ -1,19 +1,15 @@
-# appnap-frontend
+### Clone the repository
 
-## Project setup
-```
-npm install
-```
+    git clone https://github.com/TarikulHasanShuvo/appnap-assessment.git
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### Switch to the repo folder
 
-### Compiles and minifies for production
-```
-npm run build
-```
+    cd appnap-frontend
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Install all the dependencies using npm
+
+    npm install
+
+### Start the local development server
+
+    npm run serve

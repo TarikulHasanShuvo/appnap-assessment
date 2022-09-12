@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Lcobucci\JWT\Configuration;
 
 class AuthController extends Controller
 {
@@ -19,7 +20,7 @@ class AuthController extends Controller
      */
     public function login(UserLoginRequest $request)
     {
-        $credentials = request(['email', 'password', 'remember_me']);
+        $credentials = request(['email', 'password']);
 
         if (!Auth::attempt($credentials)) {
 
@@ -60,10 +61,8 @@ class AuthController extends Controller
     /**
      * @return JsonResponse|void
      */
-    public function checkToken()
+    public function checkToken(Request $request)
     {
-        if (!Auth::guard('api')->check())
-            return response()->json(["message" => "Token was not validate", "status" => 401]);
-        else  return response()->json(["message" => "Token was validate", "status" => 200]);
+        return $request->user() ? response()->json(['user' => $request->user(), 'status' => 200]) : abort(401);
     }
 }

@@ -42,7 +42,9 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $request)
     {
-        Product::create($request->all());
+        $product = $request->all();
+        if ($request->image) $product['image'] = $this->productService->storeImage($request);
+        Product::create($product);
         $products = $this->productService->getProducts();
         return response()->json(['products' => $products, 'message' => 'Product Store Successfully', 'status' => 200]);
     }
@@ -70,19 +72,24 @@ class ProductController extends Controller
     }
 
 
-    public function update(Request $request, Product $product)
+    public function update(ProductStoreRequest $request, $id)
     {
-        $product->update($request->all());
+        $product = Product::find($id);
+        $updateProduct = $request->all();
+        if ($request->image) $updateProduct['image'] = $this->productService->storeImage($request, $product->image);
+        $product->update($updateProduct);
         $products = $this->productService->getProducts();
-        return response()->json(['products' => $products, 'message' => 'Product Delete Successfully', 'status' => 200]);
+        return response()->json(['products' => $products, 'message' => 'Product Updated Successfully', 'status' => 200]);
     }
 
     /**
-     * @param Product $product
+     * @param $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
+        $product = Product::find($id);
+        if ($product->image) $this->productService->deleteImage($product->image);
         $product->delete();
         $products = $this->productService->getProducts();
         return response()->json(['products' => $products, 'message' => 'Product Delete Successfully', 'status' => 200]);

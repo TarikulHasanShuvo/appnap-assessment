@@ -1,25 +1,47 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import NotFound from '../components/PageNotFound';
+
+import PublicRoutes  from "@/views/auth/_routes";
+import PublicLayout  from "@/views/auth/Layout";
+
+//Auth Section
+import PrivateRoutes  from "@/views/web/_routes";
+import AuthLayout  from "@/views/web/Layout";
+import Login from "@/views/auth/pages/Login";
+
 
 const routes = [
+  //========== Public Routes routing==========
+
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path     : '/',
+    component: PublicLayout,
+    children : PublicRoutes
   },
+  //========== Private Routes routing==========
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path     : '/',
+    component: AuthLayout,
+    children : PrivateRoutes,
+    meta     : {
+      requireAuth: true,
+    }
+  },
+  //==========404  routing==========
+  {
+    path: '/:pathMatch(.*)*',
+    name     : 'Not Found',
+    component: NotFound,
+    meta     : {
+      title: 'Not Found'
+    }
+  },
+
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
+  history: createWebHistory(),
+  routes,
 })
 
 export default router

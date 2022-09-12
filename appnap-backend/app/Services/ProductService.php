@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductService
 {
+    /**
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
     public function getProducts()
     {
         $products = Product::query()->with('category')->latest()->get();
@@ -15,12 +18,39 @@ class ProductService
         return ProductResource::collection($products);
     }
 
-    public static function storeImage($old_avatar, $new_avatar)
+    /**
+     * @param $request
+     * @param $old_avatar
+     * @return string|null
+     */
+    public function storeImage($request, $old_avatar = null)
     {
-        if ($old_avatar && Storage::disk('public')->exists($old_avatar)) {
-            Storage::disk('public')->delete($old_avatar);
+        self::makeDirectory();
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->storeAs('public/products', $imageName);
+        if ($old_avatar) self::deleteImage($old_avatar);
+        return $imageName ?? null;
+    }
+
+    /**
+     * @param $old_avatar
+     * @return void
+     */
+    public function deleteImage($old_avatar)
+    {
+        if ($old_avatar && Storage::disk('public')->exists('products/'.$old_avatar)) {
+            Storage::disk('public')->delete('products/'.$old_avatar);
         }
-        return $new_avatar ? Storage::disk('public')->put($new_avatar, "product") : null;
+    }
+
+    /**
+     * @return void
+     */
+    public function makeDirectory()
+    {
+        if (!Storage::disk('local')->exists('products')) {
+            Storage::disk('local')->makeDirectory('products');
+        }
     }
 
 }

@@ -25,8 +25,7 @@ class ProductStoreRequest extends FormRequest
     public function rules()
     {
         $rules = ['name', 'price'];
-        if (request()->filled('image')) $rules['image'] = 'required|mimes:png,jpeg,gif';
-
+        if (request()->image) $rules['image'] = 'required|mimes:png,jpeg,gif';
         return $rules;
     }
 
