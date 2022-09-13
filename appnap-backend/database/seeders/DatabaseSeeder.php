@@ -22,5 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         Category::factory(10)->create();
         Product::factory(10)->create();
+
+        Artisan::call('passport:install');
+        Artisan::call('storage:link');
     }
 }
