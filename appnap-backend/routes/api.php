@@ -22,6 +22,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('register', 'register');
 });
 
+Route::get('product', [ProductController::class, 'index']);
+
 //Authenticate Routes
 Route::middleware('auth:api')->group(function () {
 
@@ -37,7 +39,6 @@ Route::middleware('auth:api')->group(function () {
 
     // Products Routes
     Route::controller(ProductController::class)->group(function () {
-        Route::get('product', 'index');
         Route::post('product', 'store');
         Route::post('product/{id}', 'update');
         Route::delete('product/{id}', 'destroy');

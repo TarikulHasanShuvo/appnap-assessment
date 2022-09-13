@@ -5,7 +5,7 @@
 
 <script>
 import ProductList from "@/views/web/pages/products/components/ProductList";
-import CreateEdit from "@/views/web/pages/products/components/CreateEdit";
+import CreateEdit from "@/views/web/pages/products/components/ProductCreateOrEdit";
 
 export default {
   name: "Products",

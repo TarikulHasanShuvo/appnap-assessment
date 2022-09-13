@@ -2,9 +2,9 @@ export default [
     {
         path: '/',
         name: 'Home',
-        component: () => import('./Home'),
+        component: () => import('./pages/Home'),
         meta: {
-            title: 'Login'
+            title: 'Home'
         }
     },
     {

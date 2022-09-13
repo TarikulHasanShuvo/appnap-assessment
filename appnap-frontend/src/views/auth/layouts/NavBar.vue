@@ -16,7 +16,10 @@
         </ul>
           <h6 v-if="Object.keys($store.state.user).length" class="me-3">Hi, {{ $store.state.user.name  }}</h6>
           <button @click="logout" v-if="Object.keys($store.state.user).length" class="btn btn-secondary">Logout</button>
-          <router-link v-else to="login" class="btn btn-outline-success">Login</router-link>
+         <div v-else class="">
+           <router-link to="products" class="btn btn-success me-3">Create Product</router-link>
+           <router-link to="login" class="btn btn-outline-success">Login</router-link>
+         </div>
       </div>
     </div>
   </nav>
@@ -34,11 +37,30 @@ export default {
         ApiService.post('/logout').then(res => {
           JwtService.destroyToken();
           this.$store.commit("STORE_USER", {});
+          this.toastMessage('Logout Successfully');
           this.$router.push({name: "Login"});
         }).catch(error => {
           console.log('error', error);
         })
-      }
+      },
+    toastMessage(message) {
+      const Toast = this.$swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter',this.$swal.stopTimer)
+          toast.addEventListener('mouseleave', this.$swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'success',
+        title: message
+      })
+    }
     }
 }
 </script>

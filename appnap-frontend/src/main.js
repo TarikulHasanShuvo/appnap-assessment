@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp,nextTick  } from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
@@ -11,6 +11,7 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 ApiService.init();
+
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requireAuth)) {
         if (!JwtService.getToken()) {
@@ -34,6 +35,9 @@ router.beforeEach((to, from, next) => {
             next({name: 'Products'});
         }
     }
+    nextTick(() => {
+        document.title = `${to.meta.title} - ${process.env.VUE_APP_TITLE}` || process.env.VUE_APP_TITLE
+    })
      next();
 });
 

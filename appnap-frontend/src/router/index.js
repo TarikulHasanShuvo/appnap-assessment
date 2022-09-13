@@ -7,7 +7,6 @@ import PublicLayout  from "@/views/auth/Layout";
 //Auth Section
 import PrivateRoutes  from "@/views/web/_routes";
 import AuthLayout  from "@/views/web/Layout";
-import Login from "@/views/auth/pages/Login";
 
 
 const routes = [

@@ -51,10 +51,29 @@ export default {
         JwtService.saveToken(data.access_token);
         ApiService.init();
         this.$store.commit("STORE_USER", data.user);
+        this.toastMessage('Login Successfully');
         this.$router.push({name: "Products"});
       }).catch((errors) => {
         console.log('error', errors.response.data.message);
       });
+    },
+    toastMessage(message) {
+      const Toast = this.$swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter',this.$swal.stopTimer)
+          toast.addEventListener('mouseleave', this.$swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: 'success',
+        title: message
+      })
     }
   }
 };

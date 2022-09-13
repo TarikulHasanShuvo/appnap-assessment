@@ -7,10 +7,10 @@
             <h2 class="text-center"> Registration</h2>
           </div>
           <div class="card-body">
-            <form @submit.prevent="signup" class="mb-5">
+            <form @submit.prevent="registration" class="mb-5">
               <div class="mb-3">
-                <label for="fullname" class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="fullname"
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="name"
                        v-model="form.name" required>
               </div>
 
@@ -55,16 +55,34 @@ export default {
     }
   },
   methods: {
-    signup() {
+    registration() {
       ApiService.post('/register', this.form).then(({data}) => {
         JwtService.saveToken(data.access_token);
         ApiService.init();
         this.$store.commit("STORE_USER", data.user);
+        this.toastMessage('Registration Successfully');
         this.$router.push({name: "Products"});
       }).catch((error) => {
-
+        console.log('error', error.response.data.message);
       });
+    },
+    toastMessage(message) {
+      const Toast = this.$swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter',this.$swal.stopTimer)
+          toast.addEventListener('mouseleave', this.$swal.resumeTimer)
+        }
+      })
 
+      Toast.fire({
+        icon: 'success',
+        title: message
+      })
     }
   }
 

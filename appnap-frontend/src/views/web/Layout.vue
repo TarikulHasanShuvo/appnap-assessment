@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import NavBar from "@/views/auth/layout/NavBar";
+import NavBar from "@/views/auth/layouts/NavBar";
 export default {
   name: "WebLayout",
   components: {NavBar},
