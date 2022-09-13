@@ -4,6 +4,7 @@
 
 // vendors
 @import 'vendors/bootstrap';
+@import 'vendors/fontawesome';
 
 // Layout
 @import "layouts/nav";
@@ -13,4 +14,5 @@
 
 // pages
 @import "pages/product";
+@import "pages/single-product";
 @import "pages/page-not-found";

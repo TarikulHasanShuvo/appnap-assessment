@@ -1,0 +1,32 @@
+#single-product{
+
+  .color{
+    width: 28px;
+  }
+
+  .review{
+    .fa-star{
+      font-size:18px ;
+      color: #d6d6d6;
+      &.checked{
+        color: #fdc800;
+      }
+    }
+
+  }
+
+  .quantity{
+    input{
+      width: 80px;
+    }
+  }
+
+  .add-to-cart-btn {
+    background-color: red;
+
+}
+  .zoom-image{
+    width: 100%;
+    height: 450px;
+  }
+}

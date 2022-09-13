@@ -38,7 +38,7 @@ export default {
           JwtService.destroyToken();
           this.$store.commit("STORE_USER", {});
           this.toastMessage('Logout Successfully');
-          this.$router.push({name: "Login"});
+          this.$router.push('/');
         }).catch(error => {
           console.log('error', error);
         })

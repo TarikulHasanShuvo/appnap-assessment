@@ -23,4 +23,12 @@ export default [
             title: 'Register'
         }
     },
+    {
+        path: '/design',
+        name: 'design',
+        component: () => import('./pages/Design'),
+        meta: {
+            title: 'Design'
+        }
+    },
 ];

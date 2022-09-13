@@ -13,14 +13,17 @@
         </div>
       </div>
     </div>
+    <SIngleProduct/>
   </div>
 </template>
 
 <script>
 import ApiService from "@/services/api.service";
+import SIngleProduct from "@/views/auth/components/SIngleProduct";
 
 export default {
   name: "ProductsGallery",
+  components: {SIngleProduct},
   data() {
     return {
       products: []

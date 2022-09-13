@@ -9,7 +9,7 @@ import ApiService from "@/services/api.service";
 import * as JwtService from "@/services/jwt.service";
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-
+import ImageZoom from 'vue-image-zoomer'
 ApiService.init();
 
 router.beforeEach((to, from, next) => {
@@ -41,4 +41,4 @@ router.beforeEach((to, from, next) => {
      next();
 });
 
-createApp(App).use(store).use(router).use(VueSweetalert2).mount('#app')
+createApp(App).use(store).use(router).use(VueSweetalert2).use(ImageZoom).mount('#app')
