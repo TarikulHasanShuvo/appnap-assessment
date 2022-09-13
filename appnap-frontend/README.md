@@ -1,4 +1,4 @@
-### Clone the repository
+### Clone the repository.If Already clone Main Repo then ignore this command.
 
     git clone https://github.com/TarikulHasanShuvo/appnap-assessment.git
 

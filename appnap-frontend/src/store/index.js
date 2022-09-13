@@ -3,7 +3,7 @@ import {createStore} from 'vuex'
 export default createStore({
     state: {
         user: {},
-        products: [],
+        activeProduct: [],
     },
 
     getters: {
@@ -17,8 +17,8 @@ export default createStore({
             state.user = payload
         },
 
-        STORE_PRODUCTS(state, payload) {
-            state.products = payload
+        STORE_ACTIVE_PRODUCT(state, payload) {
+            state.activeProduct = payload
         },
     },
     actions: {},

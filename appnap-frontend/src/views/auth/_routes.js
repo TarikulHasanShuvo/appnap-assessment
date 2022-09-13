@@ -24,11 +24,11 @@ export default [
         }
     },
     {
-        path: '/design',
-        name: 'design',
-        component: () => import('./pages/Design'),
+        path: '/single-product',
+        name: 'SingleProduct',
+        component: () => import('./pages/SingleProduct'),
         meta: {
-            title: 'Design'
+            title: 'Single Product'
         }
     },
 ];

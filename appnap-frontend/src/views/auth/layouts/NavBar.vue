@@ -7,14 +7,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-<!--          <li class="nav-item">-->
-<!--            <router-link to="/" class="nav-link active" href="#">Home</router-link>-->
-<!--          </li>-->
-          <li class="nav-item">
-            <router-link to="products" class="nav-link active" aria-current="page" href="#">Products</router-link>
+          <li v-if="Object.keys($store.state.user).length" class="nav-item">
+            <router-link to="/products" class="nav-link active" aria-current="page" href="#">Products</router-link>
+          </li>
+          <li v-else class="nav-item">
+            <router-link to="/" class="nav-link active" aria-current="page" href="#">Products</router-link>
           </li>
         </ul>
-          <h6 v-if="Object.keys($store.state.user).length" class="me-3">Hi, {{ $store.state.user.name  }}</h6>
+          <h6 v-if="Object.keys($store.state.user).length" class="me-3">Hi, {{ $store.state.user?.name  }}</h6>
           <button @click="logout" v-if="Object.keys($store.state.user).length" class="btn btn-secondary">Logout</button>
          <div v-else class="">
            <router-link to="products" class="btn btn-success me-3">Create Product</router-link>
